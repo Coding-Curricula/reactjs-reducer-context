@@ -1,23 +1,11 @@
-import React, { useReducer } from 'react';
+import React, { useContext } from 'react';
+import { CounterContext } from '../contexts/CounterContext';
 
-const counterReducer = (state, action) => {
-    switch (action.type) {
-        case 'increment':
-            return { ...state, count: state.count + 1 };
-        case 'decrement':
-            return { ...state, count: state.count - 1 };
-        case 'divideByTwo':
-            return { ...state, count: state.count / 2 };
-        case 'multiplyByThree':
-            return { ...state, count: state.count * 3 };
-        default:
-            throw new Error();
-    }
-}
+import Names from './Names'
+
 
 export default function Counter() {
-    // useReducer Hook
-    const [state, dispatch] = useReducer(counterReducer, { count: 0, firstName: 'John', lastName: 'Doe' });
+    const { state, dispatch } = useContext(CounterContext);
 
     return (
         <div>
@@ -27,6 +15,7 @@ export default function Counter() {
             <button onClick={() => dispatch({ type: "decrement" })}>-</button>
             <button onClick={() => dispatch({ type: "divideByTwo" })}>/2</button>
             <button onClick={() => dispatch({ type: "multiplyByThree" })}>*3</button>
+            <Names />
         </div>
     )
 }
